@@ -25,4 +25,13 @@ object SchematicIO {
             else -> throw IllegalArgumentException("Unknown version $version")
         }
     }
+
+    fun write(file: File, schematic: Schematic) {
+        if (!file.exists()) {
+            file.parentFile.mkdirs()
+            file.createNewFile()
+        }
+        val data = SchematicVersion.SpongeV3Schematic().serialize(schematic)
+        BinaryTagIO.writer().write(data, file.toPath(), BinaryTagIO.Compression.GZIP)
+    }
 }

@@ -1,6 +1,7 @@
 package io.github.bradenk04.housing.utils.schem
 
 import net.kyori.adventure.nbt.CompoundBinaryTag
+import java.io.ByteArrayOutputStream
 import kotlin.experimental.and
 
 sealed interface SchematicVersion {
@@ -69,7 +70,56 @@ sealed interface SchematicVersion {
             }
             return palette
         }
+
+        override fun serialize(schem: Schematic): CompoundBinaryTag {
+            val root = CompoundBinaryTag.builder()
+
+            root.putInt("Version", 3)
+            root.putInt("DataVersion", 4440)
+            root.putShort("Width", schem.width.toShort())
+            root.putShort("Height", schem.height.toShort())
+            root.putShort("Length", schem.length.toShort())
+
+            val paletteMap = mutableMapOf<String, Int>()
+            val blocksDataStream = ByteArrayOutputStream()
+
+            val sortedBlocks = schem.blocks.sortedWith(compareBy<RelativeBlock> { it.y }.thenBy { it.z }.thenBy { it.x })
+
+            var paletteIndex = 0
+            for (block in sortedBlocks) {
+                val state = block.blockData.toString()
+
+                val blockId = paletteMap.getOrPut(state) {
+                    paletteIndex++
+                }
+
+                writeVarInt(blocksDataStream, blockId)
+            }
+
+            val paletteTag = CompoundBinaryTag.builder()
+            paletteMap.forEach { (state, id) ->
+                paletteTag.putInt(state, id)
+            }
+
+            val blocksTag = CompoundBinaryTag.builder()
+            blocksTag.put("Palette", paletteTag.build())
+            blocksTag.putByteArray("Data", blocksDataStream.toByteArray())
+
+            root.put("Blocks", blocksTag.build())
+
+            return root.build()
+        }
+
+        private fun writeVarInt(stream: ByteArrayOutputStream, value: Int) {
+            var temp = value
+            while ((temp and 0b11111110) != 0) {
+                stream.write(temp and 0b01111111 or 0b10000000)
+                temp = temp ushr 7
+            }
+            stream.write(temp)
+        }
     }
 
-    abstract fun deserialize(cbt: CompoundBinaryTag): Schematic
+    fun deserialize(cbt: CompoundBinaryTag): Schematic
+    fun serialize(schem: Schematic): CompoundBinaryTag
 }

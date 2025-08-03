@@ -1,6 +1,7 @@
 package io.github.bradenk04.housing.utils.world
 
 import org.bukkit.Bukkit
+import org.bukkit.GameRule
 import org.bukkit.World
 import org.bukkit.WorldCreator
 import org.bukkit.generator.ChunkGenerator
@@ -18,6 +19,7 @@ object HousingWorldManager {
         worldCreator.generator(VoidChunkGenerator)
 
         val world = Bukkit.createWorld(worldCreator) ?: throw IllegalStateException("Could not create world")
+        world.setGameRule(GameRule.DO_MOB_SPAWNING, false)
         _world = world
         return world
     }

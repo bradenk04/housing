@@ -39,7 +39,17 @@ class PlayerCommands {
         val house = playersHouses.first()
         house.load()
 
-        actor.requirePlayer().teleport(house.origin)
+        actor.requirePlayer().teleport(house.spawnPoint)
         // TODO("Opens GUI or sends message of available houses")
+    }
+
+    @Subcommand("clear")
+    fun clear(actor: BukkitCommandActor) {
+        // NOTE: Temp command for testing without database
+        val playersHouses = House.tempLoaded.filter { it.owner == actor.requirePlayer().uniqueId }
+        val house = playersHouses.first()
+        actor.requirePlayer().health = 0.0
+
+        house.saveAndClear()
     }
 }
