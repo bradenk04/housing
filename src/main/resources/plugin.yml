@@ -1,0 +1,7 @@
+name: Housing
+version: ${version}
+main: io.github.bradenk04.housing.HousingPlugin
+api-version: 1.21.8
+author: bradenk04
+description: Hypixel-style housing plugin
+website: https://github.com/bradenk04/housing
