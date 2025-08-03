@@ -13,6 +13,7 @@ repositories {
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
     maven("https://oss.sonatype.org/content/repositories/snapshots")
     maven("https://oss.sonatype.org/content/repositories/central")
+    maven("https://maven.enginehub.org/repo/")
 }
 
 dependencies {
@@ -24,8 +25,8 @@ dependencies {
     implementation(libs.lamp.bukkit)
     implementation(libs.lamp.brigadier)
 
-    // Extra libs:
-    implementation(libs.schematic4j)
+    // Extra Libs:
+    implementation(libs.adventure.nbt)
 }
 
 tasks {
@@ -48,7 +49,7 @@ tasks {
     shadowJar {
         archiveClassifier.set("")
         relocate("io.github.revxrsal", "io.github.bradenk04.shaded.lamp")
-        relocate("net.sandrohc", "io.github.bradenk04.shaded.schematic4j")
+        relocate("net.kyori", "io.github.bradenk04.shaded.kyori")
     }
 
     build {
