@@ -1,6 +1,7 @@
 package io.github.bradenk04.housing
 
 import io.github.bradenk04.housing.commands.PlayerCommands
+import io.github.bradenk04.housing.utils.world.HousingWorldManager
 import org.bukkit.plugin.java.JavaPlugin
 import revxrsal.commands.Lamp
 import revxrsal.commands.bukkit.BukkitLamp
@@ -16,9 +17,10 @@ class HousingPlugin : JavaPlugin() {
     override fun onEnable() {
         plugin = this
         registerCommands()
+        HousingWorldManager.createWorld()
     }
     override fun onDisable() {
-
+        HousingWorldManager.destroyWorld()
     }
 
     private fun registerCommands() {

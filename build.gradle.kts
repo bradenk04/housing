@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     alias(libs.plugins.kotlin)
+    alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.shadow)
 }
 
@@ -24,6 +25,10 @@ dependencies {
     implementation(libs.lamp.common)
     implementation(libs.lamp.bukkit)
     implementation(libs.lamp.brigadier)
+
+    // Configuration Dependencies:
+    implementation("com.akuleshov7:ktoml-core:0.7.0")
+    implementation("com.akuleshov7:ktoml-file:0.7.0")
 
     // Extra Libs:
     implementation(libs.adventure.nbt)

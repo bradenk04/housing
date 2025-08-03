@@ -24,9 +24,10 @@ class PlayerCommands {
         val file = File("${HousingPlugin.plugin.dataFolder}/template.schem")
 
         val schem = SchematicIO.read(file)
-        val house = House(UUID.randomUUID(), "none", schem)
+        val house = House(UUID.randomUUID(), "none", schem, actor.requirePlayer().uniqueId)
 
-        house.load(actor.requirePlayer().location)
+        house.load()
+        House.tempLoaded.add(house)
         // TODO("Creates a new house for the player or errors if they have too many.")
     }
 
@@ -34,6 +35,11 @@ class PlayerCommands {
     @CommandPermission("housing.explore", defaultAccess = PermissionDefault.TRUE)
     @Description("Explores public homes across the server.")
     fun explore(actor: BukkitCommandActor) {
-        TODO("Opens GUI or sends message of available houses")
+        val playersHouses = House.tempLoaded.filter { it.owner == actor.requirePlayer().uniqueId }
+        val house = playersHouses.first()
+        house.load()
+
+        actor.requirePlayer().teleport(house.origin)
+        // TODO("Opens GUI or sends message of available houses")
     }
 }
