@@ -3,6 +3,7 @@ spigot-api = "1.21.8-R0.1-SNAPSHOT"
 kotlin = "2.2.0"
 lamp = "4.0.0-rc.12"
 shadow = "9.0.0-rc3"
+schematic4j = "1.1.0"
 
 [plugins]
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -13,3 +14,4 @@ spigot-api = { group = "org.spigotmc", name = "spigot-api", version.ref = "spigo
 lamp-common = { group = "io.github.revxrsal", name = "lamp.common", version.ref = "lamp"}
 lamp-bukkit = { group = "io.github.revxrsal", name = "lamp.bukkit", version.ref = "lamp"}
 lamp-brigadier = { group = "io.github.revxrsal", name = "lamp.brigadier", version.ref = "lamp"}
+schematic4j = { group = "net.sandrohc", name = "schematic4j", version.ref = "schematic4j" }

@@ -23,6 +23,9 @@ dependencies {
     implementation(libs.lamp.common)
     implementation(libs.lamp.bukkit)
     implementation(libs.lamp.brigadier)
+
+    // Extra libs:
+    implementation(libs.schematic4j)
 }
 
 tasks {
@@ -45,6 +48,7 @@ tasks {
     shadowJar {
         archiveClassifier.set("")
         relocate("io.github.revxrsal", "io.github.bradenk04.shaded.lamp")
+        relocate("net.sandrohc", "io.github.bradenk04.shaded.schematic4j")
     }
 
     build {
