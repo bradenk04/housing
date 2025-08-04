@@ -15,6 +15,7 @@ class House(
     data: Schematic,
     val owner: UUID,
     val plotSize: Int = 50,
+    val tags: List<String>
 ) {
     companion object {
         private const val HOUSE_SPACING = 1024
