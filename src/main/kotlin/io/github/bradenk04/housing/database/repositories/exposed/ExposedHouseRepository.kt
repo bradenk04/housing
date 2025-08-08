@@ -139,14 +139,9 @@ class ExposedHouseRepository(
         val schematicFile = File(schematicPath)
 
         if (!schematicFile.exists()) {
-            return createFromTemplate(id,theme)
+            return SchematicIO.createFromTemplate(id)
         }
 
         return SchematicIO.read(schematicFile)
-    }
-
-    private fun createFromTemplate(id: UUID, theme: String): Schematic {
-        val schematic = SchematicIO.read(PLOT_SCHEMATIC)
-        return schematic
     }
 }

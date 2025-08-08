@@ -1,6 +1,6 @@
 package io.github.bradenk04.housing.commands
 
-import io.github.bradenk04.housing.HousingPlugin
+import io.github.bradenk04.housing.database.Database
 import io.github.bradenk04.housing.domain.House
 import io.github.bradenk04.housing.utils.schem.SchematicIO
 import org.bukkit.permissions.PermissionDefault
@@ -10,7 +10,6 @@ import revxrsal.commands.annotation.Subcommand
 import revxrsal.commands.bukkit.actor.BukkitCommandActor
 import revxrsal.commands.bukkit.annotation.CommandPermission
 import revxrsal.commands.bukkit.annotation.FallbackPrefix
-import java.io.File
 import java.util.*
 
 
@@ -20,15 +19,19 @@ class PlayerCommands {
     @Subcommand("create")
     @CommandPermission("housing.create", defaultAccess = PermissionDefault.TRUE)
     @Description("Create a new house.")
-    fun create(actor: BukkitCommandActor) {
-        val file = File("${HousingPlugin.plugin.dataFolder}/template.schem")
+    suspend fun create(actor: BukkitCommandActor) {
+        val creator = actor.requirePlayer()
 
-        val schem = SchematicIO.read(file)
-        val house = House(UUID.randomUUID(), "none", schem, actor.requirePlayer().uniqueId)
+        val houseId = UUID.randomUUID()
+        val theme = "" // TODO: In GUI make this selectable
+        val plotSize = 50
+        val defaultTags = listOf<String>()
 
-        house.load()
-        House.tempLoaded.add(house)
-        // TODO("Creates a new house for the player or errors if they have too many.")
+        val newHouse = House(houseId, theme, SchematicIO.createFromTemplate(houseId), creator.uniqueId, plotSize, defaultTags)
+        Database.houseRepository.createHouse(newHouse)
+        newHouse.load()
+
+        creator.teleport(newHouse.spawnPoint)
     }
 
     @Subcommand("explore")
