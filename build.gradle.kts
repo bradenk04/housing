@@ -36,6 +36,8 @@ dependencies {
 
     // Extra Libs:
     implementation(libs.adventure.nbt)
+    implementation(libs.adventure.api)
+    implementation(libs.adventure.platform.bukkit)
     implementation(libs.kotlinx.coroutines)
 }
 

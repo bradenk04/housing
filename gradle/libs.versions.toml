@@ -5,6 +5,7 @@ kotlinx-coroutines = "1.10.2"
 lamp = "4.0.0-rc.12"
 shadow = "9.0.0-rc3"
 adventure = "4.24.0"
+adventure-platform = "4.4.1"
 exposed = "1.0.0-beta-5"
 ktoml = "0.7.0"
 
@@ -19,6 +20,8 @@ lamp-common = { group = "io.github.revxrsal", name = "lamp.common", version.ref 
 lamp-bukkit = { group = "io.github.revxrsal", name = "lamp.bukkit", version.ref = "lamp" }
 lamp-brigadier = { group = "io.github.revxrsal", name = "lamp.brigadier", version.ref = "lamp" }
 adventure-nbt = { group = "net.kyori", name = "adventure-nbt", version.ref = "adventure" }
+adventure-api = { group = "net.kyori", name = "adventure-api", version.ref = "adventure" }
+adventure-platform-bukkit = { group = "net.kyori", name = "adventure-platform-bukkit", version.ref = "adventure-platform" }
 exposed-core = { group = "org.jetbrains.exposed", name = "exposed-core", version.ref = "exposed" }
 exposed-jdbc = { group = "org.jetbrains.exposed", name = "exposed-jdbc", version.ref = "exposed" }
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
