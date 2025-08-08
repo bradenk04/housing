@@ -27,8 +27,8 @@ dependencies {
     implementation(libs.lamp.brigadier)
 
     // Configuration Dependencies:
-    implementation("com.akuleshov7:ktoml-core:0.7.0")
-    implementation("com.akuleshov7:ktoml-file:0.7.0")
+    implementation(libs.ktoml.core)
+    implementation(libs.ktoml.file)
 
     // Database Dependencies:
     implementation(libs.exposed.core)
@@ -60,6 +60,7 @@ tasks {
         archiveClassifier.set("")
         relocate("io.github.revxrsal", "io.github.bradenk04.shaded.lamp")
         relocate("net.kyori", "io.github.bradenk04.shaded.kyori")
+        minimize()
     }
 
     build {
