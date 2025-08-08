@@ -60,6 +60,9 @@ tasks {
         archiveClassifier.set("")
         relocate("revxrsal", "io.github.bradenk04.shaded.lamp")
         relocate("net.kyori", "io.github.bradenk04.shaded.kyori")
+        relocate("kotlin", "io.github.bradenk04.shaded.kotlin")
+        relocate("kotlinx", "io.github.bradenk04.shaded.kotlinx")
+        relocate("org.jetbrains.exposed", "io.github.bradenk04.shaded.exposed")
         minimize()
     }
 
