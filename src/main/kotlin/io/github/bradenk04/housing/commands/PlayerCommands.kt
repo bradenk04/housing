@@ -3,6 +3,10 @@ package io.github.bradenk04.housing.commands
 import io.github.bradenk04.housing.database.Database
 import io.github.bradenk04.housing.domain.House
 import io.github.bradenk04.housing.utils.schem.SchematicIO
+import io.github.bradenk04.housing.utils.sendMessage
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.event.ClickEvent
+import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.permissions.PermissionDefault
 import revxrsal.commands.annotation.Command
 import revxrsal.commands.annotation.Description
@@ -37,13 +41,32 @@ class PlayerCommands {
     @Subcommand("explore")
     @CommandPermission("housing.explore", defaultAccess = PermissionDefault.TRUE)
     @Description("Explores public homes across the server.")
-    fun explore(actor: BukkitCommandActor) {
-        val playersHouses = House.tempLoaded.filter { it.owner == actor.requirePlayer().uniqueId }
-        val house = playersHouses.first()
-        house.load()
+    suspend fun explore(actor: BukkitCommandActor) {
+        val actorPlayer = actor.requirePlayer()
+        val houses = Database.houseRepository.getHouses()
 
-        actor.requirePlayer().teleport(house.spawnPoint)
-        // TODO("Opens GUI or sends message of available houses")
+        var message = Component.text("")
+
+        houses.forEach { house ->
+            message = message.append(Component.text("${house.id}").clickEvent(ClickEvent.runCommand("house visit ${house.id}"))).appendSpace()
+        }
+        actorPlayer.sendMessage(message)
+    }
+
+    @Subcommand("visit")
+    @CommandPermission("housing.visit", defaultAccess = PermissionDefault.TRUE)
+    suspend fun visit(actor: BukkitCommandActor, house: String) {
+        val actorPlayer = actor.requirePlayer()
+        val houseId = UUID.fromString(house)
+        val house = Database.houseRepository.getHouse(houseId)
+
+        if (house == null) {
+            actorPlayer.sendMessage(Component.text("House not found!", NamedTextColor.RED))
+            return
+        }
+
+        house.load()
+        actorPlayer.teleport(house.spawnPoint)
     }
 
     @Subcommand("clear")
