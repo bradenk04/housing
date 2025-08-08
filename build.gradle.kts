@@ -30,8 +30,13 @@ dependencies {
     implementation("com.akuleshov7:ktoml-core:0.7.0")
     implementation("com.akuleshov7:ktoml-file:0.7.0")
 
+    // Database Dependencies:
+    implementation(libs.exposed.core)
+    implementation(libs.exposed.jdbc)
+
     // Extra Libs:
     implementation(libs.adventure.nbt)
+    implementation(libs.kotlinx.coroutines)
 }
 
 tasks {

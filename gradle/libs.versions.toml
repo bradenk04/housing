@@ -1,9 +1,11 @@
 [versions]
 spigot-api = "1.21.8-R0.1-SNAPSHOT"
 kotlin = "2.2.0"
+kotlinx-coroutines = "1.10.2"
 lamp = "4.0.0-rc.12"
 shadow = "9.0.0-rc3"
 adventure = "4.24.0"
+exposed = "1.0.0-beta-5"
 
 [plugins]
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -11,8 +13,11 @@ kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", vers
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 
 [libraries]
-spigot-api = { group = "org.spigotmc", name = "spigot-api", version.ref = "spigot-api"}
-lamp-common = { group = "io.github.revxrsal", name = "lamp.common", version.ref = "lamp"}
-lamp-bukkit = { group = "io.github.revxrsal", name = "lamp.bukkit", version.ref = "lamp"}
-lamp-brigadier = { group = "io.github.revxrsal", name = "lamp.brigadier", version.ref = "lamp"}
-adventure-nbt = { group = "net.kyori", name = "adventure-nbt", version.ref = "adventure"}
+spigot-api = { group = "org.spigotmc", name = "spigot-api", version.ref = "spigot-api" }
+lamp-common = { group = "io.github.revxrsal", name = "lamp.common", version.ref = "lamp" }
+lamp-bukkit = { group = "io.github.revxrsal", name = "lamp.bukkit", version.ref = "lamp" }
+lamp-brigadier = { group = "io.github.revxrsal", name = "lamp.brigadier", version.ref = "lamp" }
+adventure-nbt = { group = "net.kyori", name = "adventure-nbt", version.ref = "adventure" }
+exposed-core = { group = "org.jetbrains.exposed", name = "exposed-core", version.ref = "exposed" }
+exposed-jdbc = { group = "org.jetbrains.exposed", name = "exposed-jdbc", version.ref = "exposed" }
+kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
