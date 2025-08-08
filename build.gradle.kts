@@ -58,7 +58,7 @@ tasks {
 
     shadowJar {
         archiveClassifier.set("")
-        relocate("io.github.revxrsal", "io.github.bradenk04.shaded.lamp")
+        relocate("revxrsal", "io.github.bradenk04.shaded.lamp")
         relocate("net.kyori", "io.github.bradenk04.shaded.kyori")
         minimize()
     }
